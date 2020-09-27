@@ -2,6 +2,8 @@
 
 kaomoji picker for dmenu
 
+<img src="./kao.png" width="500">
+
 ## Install
 
 ```
