@@ -5,7 +5,7 @@
 # Must have xclip installed to even show menu.
 xclip -h 2>/dev/null || exit 1
 
-chosen=$(cat  ~/.local/share/kaomoji | dmenu -i -l 20 | sed "s/ .*//")
+chosen=$(dmenu -i -l 20 < ~/.local/share/kaomoji | sed "s/ .*//")
 
 [ "$chosen" != "" ] || exit
 
