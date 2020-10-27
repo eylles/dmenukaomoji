@@ -1,5 +1,6 @@
 .POSIX:
 PREFIX = ~/.local
+.PHONY: install uninstall
 install:
 	@chmod 755 dmenukaomoji
 	@mkdir -p ${DESTDIR}${PREFIX}/bin
