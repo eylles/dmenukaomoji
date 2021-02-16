@@ -1,23 +1,4 @@
 #!/bin/sh
-
-# The famous "get a menu of kaomojis to copy" script.
-
-# Must have xclip installed to even show menu.
-#xclip -h 2>/dev/null || exit 1
-# If this errors, the user wont be able to know why that is happening as there'll be no error message, why not just let it error normally when trynna run?
-
 chosen=$(dmenu -i -l 20 < ~/.local/share/kaomoji | sed "s/ .*//")
-
-#[ "$chosen" != "" ] || exit
-# The != is a little redundant, just placing the variable itself will check if its non-empty.
 [ "$chosen" ] || exit
-
-# If you run this command with an argument, it will automatically insert the character.
-#if [ -n "$1" ]; then
-# Same as above, -n and -z arent all that usefull...
-if [ "$1" ]; then
-	xdotool key Shift+Insert
-else
-	echo "$chosen" | tr -d '\n' | xclip -selection clipboard
-	notify-send "'$chosen' copied to clipboard." &
-fi
+[ "$1" ] && xdotool key Shift+Insert || $(echo "$chosen" | tr -d '\n' | xclip -selection clipboard; notify-send "'$chosen' copied to clipboard.")
