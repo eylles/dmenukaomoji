@@ -6,7 +6,7 @@
 #xclip -h 2>/dev/null || exit 1
 # If this errors, the user wont be able to know why that is happening as there'll be no error message, why not just let it error normally when trynna run?
 
-chosen=$(dmenu -i -l 20 < ~/.local/share/kaomoji | sed "s/ .*//")
+chosen=$(dmenu -i -l 20 < ~/.local/share/kaomoji)
 
 #[ "$chosen" != "" ] || exit
 # The != is a little redundant, just placing the variable itself will check if its non-empty.
@@ -18,6 +18,6 @@ chosen=$(dmenu -i -l 20 < ~/.local/share/kaomoji | sed "s/ .*//")
 if [ "$1" ]; then
 	xdotool key Shift+Insert
 else
-	echo "$chosen" | tr -d '\n' | xclip -selection clipboard
-	notify-send "'$chosen' copied to clipboard." &
+	printf '%s' "${chosen% *}" | xclip -selection clipboard
+	notify-send "'${chosen% *}' copied to clipboard." &
 fi
